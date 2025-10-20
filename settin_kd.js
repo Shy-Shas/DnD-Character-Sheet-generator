@@ -134,26 +134,29 @@ stats_sheet.appendChild(reset_sheet_btn); //inserts the button on the stat sheet
 // #######################################  Page Transition Handler  ####################################### //
 
 function next_page() {
-    const all_stats = [
+    const all_stats = [ //array to get all their ids in one for loop
         //{id:"char_img"},
-        {id:"char_namespace"},
-        {id:"Class_namespace"},
-        {id:"race_namespace"},
-        {id:"player_name_namespace"},
-        {id:"alingment_namespace"},
-        {id:"background_namespace"}
+        {id:"char_namespace", attribute:"Name"}, //attribute serves for the final sheet
+        {id:"Class_namespace", attribute:"Class"},
+        {id:"race_namespace", attribute:"Race"},
+        {id:"player_name_namespace", attribute:"Player Name"},
+        {id:"alingment_namespace", attribute:"Alingment"},
+        {id:"background_namespace", attribute:"background"}
     ];
 
-    all_stats.forEach(stat => {
-        let val = document.getElementById(stat.id).value.trim();
-        if (!val) {
+    let all_filled = true;
+    for (let stat of all_stats) {
+        let val = document.getElementById(stat.id).value.trim(); //gets the value
+        if (!val) { //if one of the fiels is empty, raises error
             document.getElementById("error_msg").textContent = "Not all fields were filled, please check again!";
-            return;
+            all_filled = false;
+            break; //
         }
         else {
-            sessionStorage.setItem(stat.id, val)
-        }
-    })
+            sessionStorage.setItem(stat.id, JSON.stringify({value:val, attribute:stat.attribute}))
+        } /*Json.stringfy -> setItem only accepts strings as values, so we turn a JSON into a string
+            to bring more than one value*/
+    }
 
-    window.location.href = "http://127.0.0.1:5500/D&D_char_sheet/final_sheet.html";
+    if (all_filled) {window.location.href = "http://127.0.0.1:5500/D&D_char_sheet/final_sheet.html";} //goes to the sheet page
 }
