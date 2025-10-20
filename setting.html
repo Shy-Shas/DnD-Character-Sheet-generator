@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="character_setting" content="width=device-width, initial-scale=1.0">
+    <link href="setttin_style.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<body>
+    <form>
+        <h1>Character Sheet</h1>
+        <div class="simple_box">
+        <input type="image" id="char_img">
+        <input type="text" id="char_namespace" placeholder="character name">
+        </div>
+
+        <div class="simple_box">
+            <input type="text" id="Class_namespace" placeholder="class">
+            <input type="text" id="race_namespace" placeholder="race">
+        </div>
+
+        <div class="simple_box">
+            <input type="text" id="alingment_namespace" placeholder="alingment">
+            <input type="text" id="background_namespace" placeholder="background">
+            <input type="text" id="player_name_namespace" placeholder="player name">
+        </div>
+
+        <div class="simple_box" id="stats_sheet" style="justify-self: center; top: 9%; position: absolute;">
+            <div style="display: flex;">  <h2>Skill Points:</h2> <h2 id="skill_points"></h2>  </div>
+        </div>
+    </form>
+
+    <form>
+        <div style="display: flex;">
+        <button type="button" id="submit_button" onclick="next_page()">
+            Submit
+        </button>
+        <button>clear all</button>
+        </div>
+        <div id="error_msg" style="color: red;"></div>
+    </form>
+    <script src="settin_kd.js"></script>
+</body>
+</html>
+</html>
