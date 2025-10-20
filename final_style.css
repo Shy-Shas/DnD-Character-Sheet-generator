@@ -1,0 +1,9 @@
+.atbt_div {
+    display: flex;
+    gap: 5px;
+}
+
+#character_info {
+    display: flex;
+    column-gap: 30px;
+}
