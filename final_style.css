@@ -4,6 +4,9 @@
 }
 
 #character_info {
+    border: 2px solid black;
+    padding: 10px;
+
     display: flex;
     column-gap: 30px;
 }
