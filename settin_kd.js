@@ -19,8 +19,8 @@ var wisdom = new Stat("wisdom",10,0);
 var charisma = new Stat("charisma",10,0);
 
 //stat array
-let stats = [strength, dexterity, constitution, inteligence, wisdom, charisma]
-//points to change the stats
+var all_stats = [strength, dexterity, constitution, inteligence, wisdom, charisma]
+//points to change the all_
 var skill_points = 9
 
 
@@ -28,7 +28,7 @@ var skill_points = 9
 const stats_sheet = document.getElementById("stats_sheet"); //gets the stat sheet div from html
 
 //circles from every stat on the list and creates a div for it
-stats.forEach(stat => {
+all_stats.forEach(stat => {
     const stt_n = document.createElement("h2"); //name of the stat
     stt_n.textContent = stat.stat_name;
 
@@ -38,6 +38,7 @@ stats.forEach(stat => {
 
     const stt_lvl = document.createElement("h1"); //stat level
     stt_lvl.textContent = stat.level;
+    stt_lvl.id = stat.stat_name
 
     const down_stt = document.createElement("button"); //down stat level button
     down_stt.textContent = "-";
@@ -117,11 +118,9 @@ reset_sheet_btn.textContent = "reset"; //button text
 reset_sheet_btn.type = "button"; //prevents the entire page from reloading
 
 reset_sheet_btn.addEventListener("click", () => {
-    stats.forEach(stat => { //circles every stat and resets it's level and bonus
+    all_stats.forEach(stat => { //circles every stat and resets it's level and bonus
         stat.level = 10;
-        //stat.bonus = 0;
-        update_bonus_value()
-        update_skill_points()
+        stat.bonus = 0;
 
         stat.stt_lvl.textContent = stat.level;
         stat.stt_bon.textContent = "+" + 0;
@@ -132,9 +131,10 @@ reset_sheet_btn.addEventListener("click", () => {
 stats_sheet.appendChild(reset_sheet_btn); //inserts the button on the stat sheet
 
 // #######################################  Page Transition Handler  ####################################### //
+let all_filled = true;
 
-function next_page() {
-    const all_stats = [ //array to get all their ids in one for loop
+function store_info() {
+    const all_info = [ //array to get all their ids in one for loop
         //{id:"char_img"},
         {id:"char_namespace", attribute:"Name"}, //attribute serves for the final sheet
         {id:"Class_namespace", attribute:"Class"},
@@ -144,19 +144,30 @@ function next_page() {
         {id:"background_namespace", attribute:"background"}
     ];
 
-    let all_filled = true;
-    for (let stat of all_stats) {
-        let val = document.getElementById(stat.id).value.trim(); //gets the value
+    for (let info of all_info) {
+        let val = document.getElementById(info.id).value.trim(); //gets the value
         if (!val) { //if one of the fiels is empty, raises error
             document.getElementById("error_msg").textContent = "Not all fields were filled, please check again!";
             all_filled = false;
             break; //
         }
         else {
-            sessionStorage.setItem(stat.id, JSON.stringify({value:val, attribute:stat.attribute}))
+            all_filled = true;
+            sessionStorage.setItem(info.id, JSON.stringify({value:val, attribute:info.attribute}))
         } /*Json.stringfy -> setItem only accepts strings as values, so we turn a JSON into a string
             to bring more than one value*/
     }
+}
 
-    if (all_filled) {window.location.href = "http://127.0.0.1:5500/D&D_char_sheet/final_sheet.html";} //goes to the sheet page
+function store_stats() {
+    for (let stat of all_stats) {
+        sessionStorage.setItem(stat.stat_name, JSON.stringify({level:stat.level, bonus:stat.bonus}))
+    }
+}
+
+function next_page() {
+    store_info();
+    store_stats();
+
+    if (all_filled) {window.location.href = "http://127.0.0.1:5500/DnD/final_sheet.html";} //goes to the sheet page
 }
