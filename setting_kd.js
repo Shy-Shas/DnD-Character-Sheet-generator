@@ -128,7 +128,7 @@ reset_sheet_btn.textContent = "reset"; //button text
 reset_sheet_btn.type = "button"; //prevents the entire page from reloading
 
 reset_sheet_btn.addEventListener("click", () => {
-    document.getElementById("img_prev").src = "Grug.jpg"
+    document.getElementById("img_prev").src = "ImageHolder.jpg"
 
     all_stats.forEach(stat => { //circles every stat and resets it's level and bonus
         stat.level = 10;
@@ -182,4 +182,5 @@ function next_page() {
     store_stats();
 
     if (all_filled) {window.location.href = "../Final_sheet/final_sheet.html";} //goes to the sheet page
+
 }
