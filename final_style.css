@@ -1,9 +1,14 @@
-.atbt_div {
+
+.box {
     display: flex;
-    gap: 5px;
+    align-items: center;
+    justify-items: center;
+
+    border: 2px solid #000000;
+    padding: 10px;
 }
 
-#character_info {
+.container {
     border: 2px solid #000000;
     padding: 10px;
 
@@ -11,9 +16,25 @@
     column-gap: 30px;
 }
 
-#stat_box {
+/* ----------------stat-related styles---------------- */
+#character_info {
+    border: 2px solid #000000;
+    padding: 10px;
+    margin-bottom: 15px;
 
-    max-width: 200px;
+    display: flex;
+    column-gap: 30px;
+}
+
+.atbt_div {
+    display: flex;
+    gap: 5px;
+}
+
+#stat_container {
+    width: 200px;
+
+    height:min-content;
 
     border: 3px solid black;
     background-color: #c9c9c9;
@@ -39,4 +60,70 @@
     border: 2px solid black;
     min-width: 60px;
     justify-items: center;
+}
+
+/* ----------------midlle-boxes-section styles---------------- */
+
+#middle_section {
+    justify-self: left;
+
+    display: flex;
+    flex-direction: row;
+
+    row-gap: 10px;
+}
+
+#inspiration_box {
+    display: flex;
+    align-items: center;
+
+    width: 275px;
+    height: 90px;
+
+    margin-top: 1.7px;
+    padding: 0px;
+}
+
+#prof_box {
+    display: flex;
+    align-items: center;
+
+    width: 275px;
+    height: 90px;
+
+    padding: 0px;
+}
+
+#saving_throws_container {
+    border: 2px solid black;
+    width: 270px;
+
+    margin: 10px 0px 10px 0px;
+    padding-left: 10px;
+}
+
+#save_box {
+    display: flex;
+    column-gap: 5px;
+
+    align-items: center;
+}
+
+#skills_container {
+    display: flex;
+    flex-direction: column;
+
+    border: 2px solid black;
+    width: 270px;
+
+    margin: 10px 0px 10px 0px;
+    padding-left: 10px;
+}
+
+#skill_box {
+    display: flex;
+    column-gap: 5px;
+
+    margin: 0;
+    align-items: center;
 }

@@ -12,6 +12,7 @@ const all_stats = [
     "strength", "dexterity", "constitution", "inteligence", "wisdom", "charisma"
 ];
 
+// ---------------character info (name, class, ...)--------------- //
 const char_info = document.getElementById("character_info")
 
 all_info.forEach(info => {
@@ -32,34 +33,55 @@ all_info.forEach(info => {
     char_info.appendChild(indv_div)
 })
 
-const stat_box = document.getElementById("stat_box")
+// ---------------stats (stat_box, saving throws, ...)--------------- //
+
+import * as MNF from "./mathNfunctions.js";
+
 all_stats.forEach(element => {
     const stat = JSON.parse(sessionStorage.getItem(element));
 
-    let stat_name = document.createElement("h3");
-    stat_name.textContent = element;
+    //stat box
+    document.getElementById("stat_container").appendChild(MNF.createStatBox({
+        name:element,
+        level:stat.level,
+        bonus:stat.bonus
+    }));
 
-    let stat_value = document.createElement("h2");
-    stat_value.textContent = stat.level;
+    //saving throws box
+    document.getElementById("saving_throws_container").appendChild(MNF.createSaveBox({
+        bonus:stat.bonus,
+        name:element
+    }));
+})
 
-    let bonus_value = document.createElement("h4");
-    if (stat.bonus < 10){
-        bonus_value.textContent = "-" + stat.bonus;
-    }
-    else {
-        bonus_value.textContent = "+" + stat.bonus;
-    }
+const all_skills = {
+        "Acrobatics": "dexterity",
+        "Animal Handling": "wisdom",
+        "Arcana": "inteligence",
+        "Athletics": "strength",
+        "Deception": "charisma",
+        "History": "inteligence",
+        "Insight": "wisdom",
+        "Intimidation": "charisma",
+        "Investigation": "inteligence",
+        "Medicine": "wisdom",
+        "Nature": "inteligence",
+        "Perception": "wisdom",
+        "Performance": "charisma",
+        "Persuasion": "charisma",
+        "Religion": "inteligence",
+        "Sleight of Hand": "dexterity",
+        "Stealth": "dexterity",
+        "Survival": "wisdom"
+    };
 
-    const main_div = document.createElement("div");
-    main_div.id = "stat_div";
-    const bonus_div = document.createElement("div");
-    bonus_div.id = "bonus_div";
+Object.entries(all_skills).forEach(([skillName, statName]) => {
+    let stat_data = JSON.parse(sessionStorage.getItem(statName));
 
-    main_div.appendChild(stat_name);
-    main_div.appendChild(stat_value);
-
-    bonus_div.appendChild(bonus_value);
-    main_div.appendChild(bonus_div);
-
-    stat_box.appendChild(main_div);
+    document.getElementById("skills_container").appendChild(MNF.createSkillArea({
+        bonus:stat_data.bonus,
+        name: skillName,
+        relStat: statName,
+        className: JSON.parse(sessionStorage.getItem("Class_namespace")).value
+    }));
 })
