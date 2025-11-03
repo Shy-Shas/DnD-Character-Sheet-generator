@@ -181,6 +181,7 @@ function next_page() {
     store_info();
     store_stats();
 
-    if (all_filled) {window.location.href = "../Final_sheet/final_sheet.html";} //goes to the sheet page
+    if (all_filled) {window.location.href = "./Final_sheet/final_sheet.html";} //goes to the sheet page
 
 }
+
