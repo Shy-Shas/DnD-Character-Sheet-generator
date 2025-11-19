@@ -16,7 +16,7 @@
         </div>
 
         <div class="simple_box">
-            <select name="classes" id="Class_namespace" placeholder="class">
+            <select name="classes" id="Class_namespace">
                 <option value="artifice">Artífice</option>
                 <option value="barbaro">Bárbaro</option>
                 <option value="bardo">Bardo</option>
@@ -31,7 +31,34 @@
                 <option value="monge">Monge</option>
                 <option value="paladino">Paladino</option>
             </select>
-            <input type="text" id="race_namespace" placeholder="race">
+            <select name="races" id="race_namespace">
+                <option value="aasimar">Aasimar</option>
+                <option value="dragonborn">Dragonborn</option>
+                <option value="dwarf">Dwarf</option>
+                <option value="elf">Elf</option>
+                <option value="gnome">Gnome</option>
+                <option value="half-elf">Half-Elf</option>
+                <option value="half-orc">Half-Orc</option>
+                <option value="halfling">Halfling</option>
+                <option value="human">Human</option>
+                <option value="tiefling">Tiefling</option>
+                <!-- Additional playable races from supplements -->
+                <option value="goliath">Goliath</option>
+                <option value="tabaxi">Tabaxi</option>
+                <option value="triton">Triton</option>
+                <option value="firbolg">Firbolg</option>
+                <option value="kenku">Kenku</option>
+                <option value="orc">Orc</option>
+                <option value="yuan-ti">Yuan-ti Pureblood</option>
+                <option value="genasi">Genasi</option>
+                <option value="kobold">Kobold</option>
+                <option value="bugbear">Bugbear</option>
+                <option value="hobgoblin">Hobgoblin</option>
+                <option value="lizardfolk">Lizardfolk</option>
+                <option value="minotaur">Minotaur</option>
+                <option value="shifter">Shifter</option>
+                <option value="warforged">Warforged</option>
+            </select>
         </div>
 
         <div class="simple_box">
@@ -40,9 +67,6 @@
             <input type="text" id="player_name_namespace" placeholder="player name">
         </div>
 
-        <div class="simple_box" id="stats_sheet" style="justify-self: center; top: 9%; position: absolute;">
-            <div style="display: flex;">  <h2>Skill Points:</h2> <h2 id="skill_points"></h2>  </div>
-        </div>
     </form>
 
     <form>
@@ -54,6 +78,18 @@
         </div>
         <div id="error_msg" style="color: red;"></div>
     </form>
+
+    <div class="simple_box" id="stats_sheet" style="justify-self: center; top: 9%; position: absolute;">
+            <div style="display: flex;">  <h2>Skill Points:</h2> <h2 id="skill_points"></h2>  </div>
+    </div>
+
+    <div id="classRaceMod">
+        <h1 id="raceName">a</h1>
+        <div id="raceModDiv"></div>
+        <h1 id="className">a</h1>
+        <div id="classModDiv"></div>
+    </div>
+
     <script src="setting_kd.js"></script>
 </body>
 </html>

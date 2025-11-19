@@ -11,6 +11,106 @@ document.getElementById("char_img").addEventListener("change", function(event) {
     }
 })
 
+//uptadetes the class and race modifiers description
+function uptdClassMod() {
+    const classMod = {
+        "artifice": {
+            status: "",
+            skills: ["Arcana", "History", "Investigation", "Medicine", "Nature", "Perception"]
+        },
+        "barbaro": {
+            status: "",
+            skills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
+        },
+        "bardo": {
+            status: "",
+            skills: ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth", "Survival"]
+        },
+        "bruxo": {
+            status: "",
+            skills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"]
+        },
+        "clerigo": {
+            status: "",
+            skills: ["History", "Insight", "Medicine", "Persuasion", "Religion"]
+        },
+        "druida": {
+            status: "",
+            skills: ["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"]
+        },
+        "feiticeiro": {
+            status: "",
+            skills: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"]
+        },
+        "guardiao": {
+            status: "",
+            skills: ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"]
+        },
+        "guerreiro": {
+            status: "",
+            skills: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"]
+        },
+        "ladino": {
+            status: "",
+            skills: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Sleight of Hand", "Stealth"]
+        },
+        "mago": {
+            status: "",
+            skills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"]
+        },
+        "monge": {
+            status: "",
+            skills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"]
+        },
+        "paladino": {
+            status: "",
+            skills: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"]
+        }
+    }; //dictionary with all classes with their skill and saving modifiers
+    
+    let className = document.getElementById('Class_namespace').value;
+
+    document.getElementById('className').textContent = className;
+    document.getElementById('classModDiv').replaceChildren()
+    for (let i = 0; i < classMod[className]['skills'].length; i++) {
+        const x_circle = "\u2297";   // ⊗ circle with a X
+        let modDiv = document.getElementById('classModDiv');
+
+        let mod = document.createElement('h3');
+        mod.textContent = x_circle + classMod[className]['skills'][i];
+
+        modDiv.appendChild(mod);
+    }
+
+}
+
+function uptdRaceMod() {
+    const raceMod = {}
+
+    let raceName = document.getElementById('race_namespace').value;
+    document.getElementById('raceName').textContent = raceName;
+
+    for (let i = 0; i < raceMod[className]['skills'].length; i++) {
+        const x_circle = "\u2297";   // ⊗ circle with a X
+        let modDiv = document.getElementById('raceModDiv');
+
+        let mod = document.createElement('h3');
+        mod.textContent = x_circle + raceMod[className]['skills'][i];
+
+        modDiv.appendChild(mod);
+    }
+}
+
+document.getElementById('Class_namespace').addEventListener('change', function() {
+    uptdClassMod()
+})
+document.getElementById('race_namespace').addEventListener('change', function() {
+    uptdRaceMod()
+})
+
+uptdClassMod()
+uptdRaceMod()
+
 // #######################################  Stat-Sheet Handling  ####################################### //
 
 //creates a class for the stats
