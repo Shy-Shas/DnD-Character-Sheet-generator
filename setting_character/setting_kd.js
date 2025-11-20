@@ -15,55 +15,55 @@ document.getElementById("char_img").addEventListener("change", function(event) {
 function uptdClassMod() {
     const classMod = {
         "artifice": {
-            status: "",
+            status: ["Inteligence"],
             skills: ["Arcana", "History", "Investigation", "Medicine", "Nature", "Perception"]
         },
         "barbaro": {
-            status: "",
+            status: ["Strenght", "Constitution"],
             skills: ["Animal Handling", "Athletics", "Intimidation", "Nature", "Perception", "Survival"]
         },
         "bardo": {
-            status: "",
+            status: ["Carisma"],
             skills: ["Acrobatics", "Animal Handling", "Arcana", "Athletics", "Deception", "History", "Insight", "Intimidation", "Investigation", "Medicine", "Nature", "Perception", "Performance", "Persuasion", "Religion", "Sleight of Hand", "Stealth", "Survival"]
         },
         "bruxo": {
-            status: "",
+            status: ["Carisma"],
             skills: ["Arcana", "Deception", "History", "Intimidation", "Investigation", "Nature", "Religion"]
         },
         "clerigo": {
-            status: "",
+            status: ["Wisdom"],
             skills: ["History", "Insight", "Medicine", "Persuasion", "Religion"]
         },
         "druida": {
-            status: "",
+            status: ["Wisdom"],
             skills: ["Arcana", "Animal Handling", "Insight", "Medicine", "Nature", "Perception", "Religion", "Survival"]
         },
         "feiticeiro": {
-            status: "",
+            status: ["Carisma"],
             skills: ["Arcana", "Deception", "Insight", "Intimidation", "Persuasion", "Religion"]
         },
-        "guardiao": {
-            status: "",
+        "guardiao": { // Ranger
+            status: ["Dexterity","Wisdom"],
             skills: ["Animal Handling", "Athletics", "Insight", "Investigation", "Nature", "Perception", "Stealth", "Survival"]
         },
         "guerreiro": {
-            status: "",
+            status: ["Strenght", "Dexterity"],
             skills: ["Acrobatics", "Animal Handling", "Athletics", "History", "Insight", "Intimidation", "Perception", "Survival"]
         },
         "ladino": {
-            status: "",
+            status: ["Dexterity"],
             skills: ["Acrobatics", "Athletics", "Deception", "Insight", "Intimidation", "Investigation", "Perception", "Performance", "Persuasion", "Sleight of Hand", "Stealth"]
         },
         "mago": {
-            status: "",
+            status: ["Inteligence"],
             skills: ["Arcana", "History", "Insight", "Investigation", "Medicine", "Religion"]
         },
         "monge": {
-            status: "",
+            status: ["Dexterity", "Wisdom"],
             skills: ["Acrobatics", "Athletics", "History", "Insight", "Religion", "Stealth"]
         },
         "paladino": {
-            status: "",
+            status: ["Strenght", "Carisma"],
             skills: ["Athletics", "Insight", "Intimidation", "Medicine", "Persuasion", "Religion"]
         }
     }; //dictionary with all classes with their skill and saving modifiers
@@ -72,6 +72,7 @@ function uptdClassMod() {
 
     document.getElementById('className').textContent = className;
     document.getElementById('classModDiv').replaceChildren()
+    
     for (let i = 0; i < classMod[className]['skills'].length; i++) {
         const x_circle = "\u2297";   // ⊗ circle with a X
         let modDiv = document.getElementById('classModDiv');
@@ -82,20 +83,229 @@ function uptdClassMod() {
         modDiv.appendChild(mod);
     }
 
+    for (let i = 0; i < classMod[className]['status'].length; i++) {
+        const x_circle = "\u2297";   // ⊗ circle with a X
+        let modDiv = document.getElementById('classModDiv');
+
+        let mod = document.createElement('h3');
+        mod.textContent =  x_circle + classMod[className]['status'][i] + '= +1';
+
+        //statusName[i] -> goes to the status and gets the current name
+        //statusIncrease[statusName[i]] -> gets the value of the current name
+
+        modDiv.appendChild(mod);
+    }
+
 }
 
 function uptdRaceMod() {
-    const raceMod = {}
+    const raceMod = {
+        // Player's Handbook Races (and common variants)
+        "aasimar": {
+            status: {
+                "Charisma": +2,
+                "Wisdom": +1
+            },
+            skills: []
+        },
+        "dragonborn": {
+            status: {
+                "Strength": +2,
+                "Charisma": +1
+            },
+            skills: []
+        },
+        "dwarf": { // Base Dwarf (often split into Hill/Mountain)
+            status: {
+                "Constitution": +2
+            },
+            skills: []
+        },
+        "elf": { // Base Elf (often split into High/Wood/Drow)
+            status: {
+                "Dexterity": +2
+            },
+            skills: ["Perception"]
+        },
+        "gnome": { // Base Gnome (often split into Forest/Rock)
+            status: {
+                "Intelligence": +2
+            },
+            skills: []
+        },
+        "half-elf": {
+            status: {
+                "Charisma": +2,
+                "Other_1": +1, // Two attributes of player's choice
+                "Other_2": +1
+            },
+            skills: []
+        },
+        "half-orc": {
+            status: {
+                "Strength": +2,
+                "Constitution": +1
+            },
+            skills: ["Intimidation"]
+        },
+        "halfling": { // Base Halfling (often split into Lightfoot/Stout)
+            status: {
+                "Dexterity": +2
+            },
+            skills: []
+        },
+        "human": {
+            status: {
+                "Strength": +1,
+                "Dexterity": +1,
+                "Constitution": +1,
+                "Intelligence": +1,
+                "Wisdom": +1,
+                "Charisma": +1
+            },
+            skills: []
+        },
+        "tiefling": {
+            status: {
+                "Charisma": +2,
+                "Intelligence": +1
+            },
+            skills: []
+        },
+        
+        // Additional Playable Races from Supplements
+        "goliath": {
+            status: {
+                "Strength": +2,
+                "Constitution": +1
+            },
+            skills: ["Athletics"]
+        },
+        "tabaxi": {
+            status: {
+                "Dexterity": +2,
+                "Charisma": +1
+            },
+            skills: ["Perception", "Stealth"]
+        },
+        "triton": {
+            status: {
+                "Strength": +1,
+                "Constitution": +1,
+                "Charisma": +1
+            },
+            skills: []
+        },
+        "firbolg": {
+            status: {
+                "Wisdom": +2,
+                "Strength": +1
+            },
+            skills: []
+        },
+        "kenku": {
+            status: {
+                "Dexterity": +2,
+                "Wisdom": +1
+            },
+            skills: ["Acrobatics", "Deception", "Stealth", "Sleight of Hand"] // Choose two
+        },
+        "orc": { // Volo's Guide to Monsters Orc
+            status: {
+                "Strength": +2,
+                "Constitution": +1
+            },
+            skills: ["Intimidation"]
+        },
+        "yuan-ti": { // Yuan-ti Pureblood
+            status: {
+                "Charisma": +2,
+                "Intelligence": +1
+            },
+            skills: []
+        },
+        "genasi": { // Base Genasi
+            status: {
+                "Constitution": +2
+            },
+            skills: [] // Depends on subrace (Air, Earth, Fire, Water)
+        },
+        "kobold": { // Volo's Guide to Monsters Kobold
+            status: {
+                "Dexterity": +2
+            },
+            skills: []
+        },
+        "bugbear": {
+            status: {
+                "Strength": +2,
+                "Dexterity": +1
+            },
+            skills: ["Stealth"]
+        },
+        "hobgoblin": {
+            status: {
+                "Constitution": +2,
+                "Intelligence": +1
+            },
+            skills: []
+        },
+        "lizardfolk": {
+            status: {
+                "Constitution": +2,
+                "Wisdom": +1
+            },
+            skills: ["Nature", "Survival"] // Choose one
+        },
+        "minotaur": { // Guildmaster's Guide to Ravnica Minotaur
+            status: {
+                "Strength": +2,
+                "Constitution": +1
+            },
+            skills: []
+        },
+        "shifter": { // Base Shifter
+            status: {
+                "Dexterity": +1
+            },
+            skills: [] // Varies significantly by subrace
+        },
+        "warforged": {
+            status: {
+                "Constitution": +1,
+            },
+            skills: []
+        }
+    };
 
     let raceName = document.getElementById('race_namespace').value;
+    document.getElementById('raceModDiv').replaceChildren()
+
     document.getElementById('raceName').textContent = raceName;
 
-    for (let i = 0; i < raceMod[className]['skills'].length; i++) {
+    if (raceMod[raceName]['skills'].length > 0) {
+        for (let i = 0; i < raceMod[raceName]['skills'].length; i++) {
+            const x_circle = "\u2297";   // ⊗ circle with a X
+            let modDiv = document.getElementById('raceModDiv');
+
+            let mod = document.createElement('h3');
+            mod.textContent = x_circle + raceMod[raceName]['skills'][i];
+
+            modDiv.appendChild(mod);
+        }
+    }
+
+    let statusIncrease = raceMod[raceName]['status']; // Array de valores (ex: [1, 3])
+    let statusName = Object.keys(statusIncrease); // Array de chaves (ex: ["Charisma", "Wisdom"])
+    for (let i = 0; i < statusName.length; i++) {
         const x_circle = "\u2297";   // ⊗ circle with a X
         let modDiv = document.getElementById('raceModDiv');
 
         let mod = document.createElement('h3');
-        mod.textContent = x_circle + raceMod[className]['skills'][i];
+        mod.textContent =  x_circle + statusName[i] + '= +' + statusIncrease[statusName[i]];
+
+        //statusName[i] -> goes to the status and gets the current name
+        //statusIncrease[statusName[i]] -> gets the value of the current name
 
         modDiv.appendChild(mod);
     }
